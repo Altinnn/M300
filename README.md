@@ -123,12 +123,12 @@ Firewall-Regeln
     vagrant ssh web
     sudo ufw allow 443/tcp
     exit
-
+    
     # Port 22 (SSH) nur für den Host (wo die VM laufen) öffnen
     vagrant ssh web
     sudo ufw allow to any port 22
     exit
-
+    
     # Port 3306 (MySQL) nur für den web Server öffnen
     vagrant ssh database
     sudo ufw allow from 192.168.10.100 to any port 3306
@@ -165,7 +165,7 @@ Die Weiterleitungen sind z.B. in sites-enabled/001-reverseproxy.conf eingetragen
         Order deny,allow
         Allow from all
     </Proxy>
-
+    
     # Weiterleitungen master
     ProxyPass /master http://master
     ProxyPassReverse /master http://master
@@ -180,39 +180,39 @@ Die Weiterleitungen sind z.B. in sites-enabled/001-reverseproxy.conf eingetragen
 
     # Default Konfiguration in /etc/apache2/sites-available freischalten (wird nach sites-enabled verlinkt
     sudo a2ensite default-ssl.conf
-
+    
     # SSL Modul in Apache2 aktivieren
     sudo a2enmod ssl
-
+    
     # Optional HTTP deaktivieren
     sudo a2dissite 000-default.conf 
-
+    
     # Datei /etc/apache2/ports.conf editieren und <Listen 80> durch Voranstellen von # deaktivieren
     sudo nano /etc/apache2/ports.conf
-
+    
     # Unter default-ssl.conf die Server IP eintragen 
     sudo nano /etc/apache2/sites-available/default-ssl.conf
     <IfModule mod_ssl.c>
         <VirtualHost _default_:443>
                 ServerName 192.168.10.101
-
+    
                 DocumentRoot /var/www/html
-
+    
                 ErrorLog ${APACHE_LOG_DIR}/error.log
                 CustomLog ${APACHE_LOG_DIR}/access.log combined
-
+    
                 SSLEngine on
-
+    
                 SSLCertificateFile      /etc/ssl/certs/apache-selfsigned.crt
                 SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
-
+    
                 <FilesMatch "\.(cgi|shtml|phtml|php)$">
                                 SSLOptions +StdEnvVars
                 </FilesMatch>
                 <Directory /usr/lib/cgi-bin>
                                 SSLOptions +StdEnvVars
                 </Directory>
-
+    
         </VirtualHost>
   </IfModule>
 
@@ -242,6 +242,14 @@ Mit den Erstellen von Markdown funktionierte es von Anfang an gut.
 
 ### 07 - Reflektion
 Die LB01 verlief im Grossen ganzen recht gut. Das Erstellen der beiden VM mit Vagrant funktionierte ohne grosse Probleme. 
+
+ich fand die LB01 äusserst spannend. ich versuchte mich somit der Informatik zu geben und habe es seht interessant gefunden.
+
+Ich hatte im persönlichen leben einen Rückstoss der mit meiner Gesundheit zu tun hatte.
+
+Ich habe gesehen das ich vieles machen kann nur wen ich es sehe und auch versuche zu meistern. Ich fand im allgemeinem sehr toll so etwas zu machen und zu sehen wieviel man mit einem Vagrant File alles anstellen kann.
+
+Ich kann VMs kreieren, laufen lassen und der Rest funktioniert. Danach habe ich das Konzept "Multi-VMs" mir genauer angeschaut und dies gefolgt. Jetzt funktioniert mein Skript immer noch, doch Fehler hat es da ich nicht mehr viel Zeit hatte.
 
 
 
