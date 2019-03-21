@@ -1,15 +1,5 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
+Vagrant.configure(2) do |config|
 
-# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
-VAGRANTFILE_API_VERSION = "2"
-
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
-
-  # Every Vagrant virtual environment requires a box to build off of.
   config.vm.define "database01" do |db|
     db.vm.box = "ubuntu/xenial64"
 	db.vm.provider "virtualbox" do |vb|
@@ -43,8 +33,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		sudo ln -s /usr/share/adminer/latest.php /usr/share/adminer/adminer.php
 		echo "Alias /adminer.php /usr/share/adminer/adminer.php" | sudo tee /etc/apache2/conf-available/adminer.conf
 		sudo a2enconf adminer.conf 
-		sudo service apache2 restart 
-	  echo '127.0.0.1 localhost webserver01\n192.168.10.100 database01' > /etc/hosts
+		sudo service apache2 restart
+	  	echo '127.0.0.1 localhost webserver01\n192.168.10.100 database01' > /etc/hosts
+   su		sudo service apache2 reload 
 SHELL
 	end  
  end
